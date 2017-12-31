@@ -3,6 +3,7 @@
 Generates random number for Nodejs (and browser) using Mersenne Twister.
 
 [![Build Status](https://travis-ci.org/de314/drand.svg?branch=master)](https://travis-ci.org/de314/drand)
+[![Coverage Status](https://coveralls.io/repos/github/de314/drand/badge.svg?branch=master)](https://coveralls.io/github/de314/drand?branch=master)
 
 ## Usage
 
