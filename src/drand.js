@@ -3,7 +3,7 @@ import MersenneTwister from 'mersenne-twister'
 
 const BIT_MASK_32 = ~(1 << 31)
 
-export function Drand(seed) {
+function Drand(seed) {
   this.seed = seed
   this.generator = new MersenneTwister(seed)
 }
@@ -31,6 +31,14 @@ Drand.prototype.randLong = function(arg1, arg2) {
   const min = _.isNil(arg1) ? Number.MIN_SAFE_INTEGER : _.isNil(arg2) ? 0 : arg1
   const max = _.isNil(arg1) ? Number.MAX_SAFE_INTEGER : _.isNil(arg2) ? arg1 : arg2
   return Math.floor(this.rand() * (max - min)) + min
+}
+
+Drand.setGlobal = function(seed) {
+  const drand = new Drand(seed)
+
+  Math.rand = drand.rand.bind(drand)
+  Math.randInt = drand.randInt.bind(drand)
+  Math.randLong = drand.randLong.bind(drand)
 }
 
 export default Drand
