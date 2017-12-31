@@ -34,19 +34,31 @@ describe('Drand', function() {
       expect(new Drand(314).randInt()).to.not.equal(new Drand(2718).randInt())
     })
     it('should generate [MIN_SAFE_INTEGER, MAX_SAFE_INTEGER) with no params', function() {
-      expect(new Drand(0).randInt()).to.equal(-1426063362)
+      expect(new Drand(0).randInt()).to.equal(721420287)
     })
     it('should generate [0, <max>)', function() {
       expect(new Drand(0).randInt(100)).to.equal(54)
     })
     it('should generate [<min>, <max>)', function() {
-      expect(new Drand(0).randInt(50, 100)).to.equal(76)
+      expect(new Drand(0).randInt(50, 100)).to.equal(77)
     })
     it('should generate [<min>, <max>) with negatives', function() {
       expect(new Drand(0).randInt(-10, -2)).to.equal(-6)
     })
     it('should generate [<min>, <max>) across 0', function() {
       expect(new Drand(1).randInt(-10, 10)).to.equal(-2)
+    })
+    it('should generate big negatives when applying a bit mask', function() {
+      var r = new Drand(1)
+      for (var i = 0; i < 100; i++) {
+        expect(r.randInt(Number.MIN_SAFE_INTEGER, 0)).to.be.below(0)
+      }
+    })
+    it('should generate big positives when applying a bit mask', function() {
+      var r = new Drand(1)
+      for (var i = 0; i < 100; i++) {
+        expect(r.randInt(1, Number.MAX_SAFE_INTEGER)).to.be.above(0)
+      }
     })
   })
   describe('longs', function() {

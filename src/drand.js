@@ -1,7 +1,7 @@
 import _ from 'lodash'
 import MersenneTwister from 'mersenne-twister'
 
-const BIT_MASK_32 = ~(1 << 32)
+const BIT_MASK_32 = ~(1 << 31)
 
 export function Drand(seed) {
   this.seed = seed
@@ -14,8 +14,17 @@ Drand.prototype.rand = function(arg1, arg2) {
   return this.generator.random() * (max - min) + min
 }
 
+function sameSign(num1, num2) {
+  return num1 < 0 === num2 < 0
+}
+
 Drand.prototype.randInt = function(arg1, arg2) {
-  return this.randLong(arg1, arg2) & BIT_MASK_32
+  const longNum = this.randLong(arg1, arg2)
+  let intNum = ((longNum | 0) << 1) >> 1
+  if (!sameSign(longNum, intNum)) {
+    intNum *= -1
+  }
+  return intNum
 }
 
 Drand.prototype.randLong = function(arg1, arg2) {
