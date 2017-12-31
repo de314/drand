@@ -1,4 +1,4 @@
 'use strict'
-import drand from './drand'
+import Drand from './drand'
 
-module.exports = drand;
+module.exports = Drand
