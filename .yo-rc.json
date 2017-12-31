@@ -1,0 +1,9 @@
+{
+  "generator-create-npm-package": {
+    "promptValues": {
+      "ghUsername": "de314",
+      "authorName": "David Esposito",
+      "email": "david@de314.com"
+    }
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "name": "drand",
+  "version": "0.1.0",
+  "description": "A new NPM package.",
+  "main": "lib/index.js",
+  "homepage": "https://de314.github.io/drand",
+  "scripts": {
+    "compile": "rimraf lib/ && babel ./src --out-dir lib/ --copy-files",
+    "pushToNpm": "npm run test && npm run compile && npm publish",
+    "test": "babel-node ./node_modules/.bin/isparta cover _mocha -- --recursive --reporter spec"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://www.github.com/de314/drand"
+  },
+  "author": "David Esposito <david@de314.com> (https://github.com/de314)",
+  "license": "MIT",
+  "dependencies": {
+    "babel-plugin-transform-object-rest-spread": "6.26.0",
+    "babel-polyfill": "6.26.0",
+    "lodash": "4.17.4"
+  },
+  "devDependencies": {
+    "babel-cli": "6.26.0",
+    "babel-core": "6.26.0",
+    "babel-preset-env": "1.6.1",
+    "chai": "4.1.2",
+    "isparta": "4.0.0",
+    "istanbul": "0.4.5",
+    "mocha": "4.0.1",
+    "rimraf": "2.6.2"
+  }
+}
