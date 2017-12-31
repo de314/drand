@@ -2,6 +2,8 @@
 
 Generates random number for Nodejs (and browser) using Mersenne Twister.
 
+[![Build Status](https://travis-ci.org/de314/drand.svg?branch=master)](https://travis-ci.org/de314/drand)
+
 ## Usage
 
 ```javascript
