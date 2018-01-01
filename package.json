@@ -1,6 +1,6 @@
 {
   "name": "drand",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A new NPM package.",
   "main": "lib/index.js",
   "homepage": "https://de314.github.io/drand",
