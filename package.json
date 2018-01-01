@@ -1,6 +1,6 @@
 {
   "name": "drand",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Generates random number for Nodejs (and browser) using Mersenne Twister.",
   "main": "lib/index.js",
   "homepage": "https://de314.github.io/drand",
