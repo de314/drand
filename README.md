@@ -2,10 +2,15 @@
 
 Generates random number for Nodejs (and browser) using Mersenne Twister.
 
+[![NPM package](https://nodei.co/npm/drand.png)](https://www.npmjs.com/package/drand)
+
 [![Build Status](https://travis-ci.org/de314/drand.svg?branch=master)](https://travis-ci.org/de314/drand)
 [![Coverage Status](https://coveralls.io/repos/github/de314/drand/badge.svg?branch=master)](https://coveralls.io/github/de314/drand?branch=master)
+[![dependencies Status](https://david-dm.org/de314/generator-create-npm-package/status.svg)](https://david-dm.org/de314/generator-create-npm-package)
 
 ## Usage
+
+[![Try Drand on RunKit](https://badge.runkitcdn.com/Drand.svg)](https://npm.runkit.com/drand)
 
 ```javascript
 var Drand = require('drand')

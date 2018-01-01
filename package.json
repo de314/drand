@@ -4,6 +4,7 @@
   "description": "A new NPM package.",
   "main": "lib/index.js",
   "homepage": "https://de314.github.io/drand",
+  "runkitExampleFilename": "docs/runkit.example.js",
   "scripts": {
     "compile": "rimraf lib/ && babel ./src --out-dir lib/ --copy-files",
     "push:git": "git push && git push --tags",
