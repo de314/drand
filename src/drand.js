@@ -36,9 +36,11 @@ Drand.prototype.randLong = function(arg1, arg2) {
 Drand.setGlobal = function(seed) {
   const drand = new Drand(seed)
 
-  Math.rand = drand.rand.bind(drand)
-  Math.randInt = drand.randInt.bind(drand)
-  Math.randLong = drand.randLong.bind(drand)
+  Math.drand = drand.rand.bind(drand)
+  Math.drandInt = drand.randInt.bind(drand)
+  Math.drandLong = drand.randLong.bind(drand)
 }
+
+Drand.setGlobal()
 
 export default Drand

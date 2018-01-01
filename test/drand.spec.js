@@ -85,39 +85,30 @@ describe('Drand', function() {
     })
   })
   describe('global', function() {
-    before(function() {
-      Math.rand = undefined
-      Math.randInt = undefined
-      Math.randLong = undefined
-    })
-    it('should add drand functions to Math', function() {
-      expect(Math.rand).to.be.undefined
-      expect(Math.randInt).to.be.undefined
-      expect(Math.randLong).to.be.undefined
-      Drand.setGlobal()
-      expect(Math.rand).to.be.a('function')
-      expect(Math.randInt).to.be.a('function')
-      expect(Math.randLong).to.be.a('function')
+    it('should add drand functions to Math automatically', function() {
+      expect(Math.drand).to.be.a('function')
+      expect(Math.drandInt).to.be.a('function')
+      expect(Math.drandLong).to.be.a('function')
     })
     it('should respect seed for random doubles', function() {
       Drand.setGlobal(0)
-      expect(Math.rand()).to.equal(0.548813502304256)
+      expect(Math.drand()).to.equal(0.548813502304256)
     })
     it('should respect seed for random integers', function() {
       Drand.setGlobal(0)
-      expect(Math.randInt()).to.equal(721420287)
+      expect(Math.drandInt()).to.equal(721420287)
     })
     it('should respect seed for random longs', function() {
       Drand.setGlobal(0)
-      expect(Math.randLong()).to.equal(879345883152383)
+      expect(Math.drandLong()).to.equal(879345883152383)
     })
     it('should honor resetting the seed', function() {
       Drand.setGlobal(0)
-      expect(Math.rand()).to.equal(0.548813502304256)
-      expect(Math.rand()).to.equal(0.5928446163889021)
+      expect(Math.drand()).to.equal(0.548813502304256)
+      expect(Math.drand()).to.equal(0.5928446163889021)
       Drand.setGlobal(0)
-      expect(Math.rand()).to.equal(0.548813502304256)
-      expect(Math.rand()).to.equal(0.5928446163889021)
+      expect(Math.drand()).to.equal(0.548813502304256)
+      expect(Math.drand()).to.equal(0.5928446163889021)
     })
   })
 })
