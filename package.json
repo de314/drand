@@ -1,7 +1,7 @@
 {
   "name": "drand",
   "version": "1.0.3",
-  "description": "A new NPM package.",
+  "description": "Generates random number for Nodejs (and browser) using Mersenne Twister.",
   "main": "lib/index.js",
   "homepage": "https://de314.github.io/drand",
   "runkitExampleFilename": "docs/runkit.example.js",
