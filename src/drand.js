@@ -3,42 +3,48 @@ import MersenneTwister from 'mersenne-twister'
 
 const BIT_MASK_32 = ~(1 << 31)
 
-function Drand(seed) {
-  this.seed = seed
-  this.generator = new MersenneTwister(seed)
-}
-
-Drand.prototype.rand = function(arg1, arg2) {
-  const min = _.isNil(arg1) || _.isNil(arg2) ? 0 : arg1
-  const max = _.isNil(arg1) ? 1 : _.isNil(arg2) ? arg1 : arg2
-  return this.generator.random() * (max - min) + min
-}
-
 function sameSign(num1, num2) {
   return num1 < 0 === num2 < 0
 }
 
-Drand.prototype.randInt = function(arg1, arg2) {
-  const longNum = this.randLong(arg1, arg2)
-  let intNum = ((longNum | 0) << 1) >> 1
-  if (!sameSign(longNum, intNum)) {
-    intNum *= -1
+class Drand {
+  constructor(seed) {
+    this.reseed(seed)
   }
-  return intNum
-}
 
-Drand.prototype.randLong = function(arg1, arg2) {
-  const min = _.isNil(arg1) ? Number.MIN_SAFE_INTEGER : _.isNil(arg2) ? 0 : arg1
-  const max = _.isNil(arg1) ? Number.MAX_SAFE_INTEGER : _.isNil(arg2) ? arg1 : arg2
-  return Math.floor(this.rand() * (max - min)) + min
-}
+  reseed(seed = Math.floor(Math.random() * Number.MAX_SAFE_INTEGER)) {
+    this.seed = seed
+    this.generator = new MersenneTwister(seed)
+  }
 
-Drand.setGlobal = function(seed) {
-  const drand = new Drand(seed)
+  rand(arg1, arg2) {
+    const min = _.isNil(arg1) || _.isNil(arg2) ? 0 : arg1
+    const max = _.isNil(arg1) ? 1 : _.isNil(arg2) ? arg1 : arg2
+    return this.generator.random() * (max - min) + min
+  }
 
-  Math.drand = drand.rand.bind(drand)
-  Math.drandInt = drand.randInt.bind(drand)
-  Math.drandLong = drand.randLong.bind(drand)
+  randInt(arg1, arg2) {
+    const longNum = this.randLong(arg1, arg2)
+    let intNum = ((longNum | 0) << 1) >> 1
+    if (!sameSign(longNum, intNum)) {
+      intNum *= -1
+    }
+    return intNum
+  }
+
+  randLong(arg1, arg2) {
+    const min = _.isNil(arg1) ? Number.MIN_SAFE_INTEGER : _.isNil(arg2) ? 0 : arg1
+    const max = _.isNil(arg1) ? Number.MAX_SAFE_INTEGER : _.isNil(arg2) ? arg1 : arg2
+    return Math.floor(this.rand() * (max - min)) + min
+  }
+
+  static setGlobal(seed) {
+    const drand = new Drand(seed)
+
+    Math.drand = drand.rand.bind(drand)
+    Math.drandInt = drand.randInt.bind(drand)
+    Math.drandLong = drand.randLong.bind(drand)
+  }
 }
 
 Drand.setGlobal()

@@ -1,6 +1,7 @@
 import 'babel-polyfill'
 import { expect } from 'chai'
 import Drand from '../src/drand'
+import _ from 'lodash'
 
 describe('Drand', function() {
   describe('doubles', function() {
@@ -82,6 +83,42 @@ describe('Drand', function() {
     })
     it('should generate [<min>, <max>) across 0', function() {
       expect(new Drand(1).randLong(-10, 10)).to.equal(-2)
+    })
+  })
+  describe('reseed', function() {
+    it('should reseed with undefined', function() {
+      const r = new Drand()
+      const expected = _.range(3).map(() => r.rand())
+      r.reseed()
+      const actual = _.range(3).map(() => r.rand())
+      expect(actual).to.not.deep.equal(expected)
+    })
+    it('should reseed with value=zero', function() {
+      const r = new Drand(0)
+      expect(r.rand()).to.equal(0.548813502304256)
+      expect(r.rand()).to.equal(0.5928446163889021)
+      r.reseed(0)
+      expect(r.rand()).to.equal(0.548813502304256)
+      expect(r.rand()).to.equal(0.5928446163889021)
+    })
+    it('should reseed with multiple values', function() {
+      const r = new Drand()
+      const expected = _.range(3).map(() => r.rand())
+      r.reseed(0)
+      expect(r.rand()).to.equal(0.548813502304256)
+      expect(r.rand()).to.equal(0.5928446163889021)
+      r.reseed(1)
+      expect(r.rand()).to.equal(0.4170219984371215)
+      expect(r.rand()).to.equal(0.99718480813317)
+      r.reseed()
+      const actual = _.range(3).map(() => r.rand())
+      expect(actual).to.not.deep.equal(expected)
+      r.reseed(0)
+      expect(r.rand()).to.equal(0.548813502304256)
+      expect(r.rand()).to.equal(0.5928446163889021)
+      r.reseed(1)
+      expect(r.rand()).to.equal(0.4170219984371215)
+      expect(r.rand()).to.equal(0.99718480813317)
     })
   })
   describe('global', function() {
